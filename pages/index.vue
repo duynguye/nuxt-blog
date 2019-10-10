@@ -4,7 +4,7 @@
       <h1>Get the latest tech news</h1>
     </section>
 
-    <PostList />
+    <PostList  :posts="loadedPosts" />
   </div>
 </template>
 
@@ -14,6 +14,32 @@ import PostList from '@/components/Posts/PostList'
 export default {
   components: {
     PostList
+  },
+
+  data() {
+    return {
+      loadedPosts: []
+    }
+  },
+
+  asyncData(context, callback) {
+    setTimeout(() => {
+      callback(null, {
+        loadedPosts: [
+          { 
+            id: 1, 
+            title: 'First Post', 
+            previewText: 'This is our first post', 
+            thumbnail: 'https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg' 
+          }, {
+            id: 2, 
+            title: 'Second Post', 
+            previewText: 'This is our second post', 
+            thumbnail: 'https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg' 
+          }
+        ]
+      }) 
+    }, 1500)
   }
 }
 </script>
